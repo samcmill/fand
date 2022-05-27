@@ -1,0 +1,21 @@
+{
+  "cpu": {
+    "core_count": {
+      "num_cores": 8
+    } 
+  },
+  "disk": {
+    "percent_free": [
+      {
+        "filesystem": "/",
+        "percent": 5.0
+      }
+    ]
+  },
+  "memory": {
+    "physical_size": {
+      "mem_size": 8589934592, /* bytes */
+      "tolerance": 1048576    /* bytes */
+    }
+  }
+}

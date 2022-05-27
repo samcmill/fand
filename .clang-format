@@ -1,0 +1,11 @@
+BasedOnStyle: LLVM
+
+AlwaysBreakTemplateDeclarations: true
+BreakBeforeBraces: Custom
+BraceWrapping:   
+  BeforeCatch: true
+  BeforeElse: true
+IncludeBlocks: Preserve
+Language: Cpp
+NamespaceIndentation: All
+Standard: Cpp11
