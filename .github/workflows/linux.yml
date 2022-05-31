@@ -38,7 +38,7 @@ jobs:
       run: |
         cd wassail
         ./autogen.sh
-        ./configure
+        ./configure --disable-python --prefix=/usr
         make -j $(nproc)
         sudo make install
 
