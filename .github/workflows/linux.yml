@@ -1,0 +1,55 @@
+name: Linux build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        compiler: [gcc]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check out wassail
+      uses: actions/checkout@v2
+      with:
+        repository: samcmill/wassail
+        path: wassail
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update -y
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y autoconf autoconf-archive automake ca-certificates file gnupg libtool make pkg-config libdispatch-dev libibumad-dev libpciaccess-dev libssh-dev libudev-dev openssh-client software-properties-common wget
+
+    - name: Set compiler
+      run: |
+        if [ "${{ matrix.compiler }}" = "clang" ]; then
+          echo "CC=clang" >> $GITHUB_ENV
+          echo "CXX=clang++" >> $GITHUB_ENV
+        else
+          echo "CC=gcc" >> $GITHUB_ENV
+          echo "CXX=g++" >> $GITHUB_ENV
+        fi
+
+    - name: Build wassail
+      run: |
+        cd ../wassail
+        ./autogen.sh
+        ./configure
+        make -j $(nproc)
+        sudo make install
+
+    - name: autogen
+      run: autoreconf --force --verbose --install
+
+    - name: configure
+      run: ./configure
+
+    - name: make
+      run: make -j$(nproc)
+
+    - name: make install
+      run: sudo make install
