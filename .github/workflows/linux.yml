@@ -38,7 +38,7 @@ jobs:
       run: |
         cd wassail
         ./autogen.sh
-        ./configure --disable-python --prefix=/usr
+        ./configure --disable-python
         make -j $(nproc)
         sudo make install
 
@@ -46,7 +46,7 @@ jobs:
       run: autoreconf --force --verbose --install
 
     - name: configure
-      run: ./configure
+      run: ./configure --with-wassail=/usr/local
 
     - name: make
       run: make -j$(nproc)
