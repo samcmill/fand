@@ -36,7 +36,7 @@ jobs:
 
     - name: Build wassail
       run: |
-        cd ../wassail
+        cd wassail
         ./autogen.sh
         ./configure
         make -j $(nproc)
